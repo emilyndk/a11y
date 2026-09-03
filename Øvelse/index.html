@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo – Accessibility-træet i Chrome</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <p><a href="../index.html">Tilbage til oversigten</a></p>
+      <h1>Accessibility-træet i Chrome</h1>
+      <p>
+        Denne side er lavet til fælles inspektion. Se først på siden, forudsig
+        derefter træet, og åbn så DevTools.
+      </p>
+
+      <details>
+        <summary>Sådan inspicerer I i Chrome</summary>
+        <ol>
+          <li>Åbn DevTools og vælg fanen <strong>Elements</strong>.</li>
+          <li>Markér det element, I undersøger.</li>
+          <li>
+            Åbn panelet <strong>Accessibility</strong>. Find det eventuelt via
+            DevTools-menuen eller kommandoen “Show Accessibility”.
+          </li>
+          <li>
+            Notér elementets <strong>role</strong>, <strong>name</strong>,
+            <strong>description</strong> og eventuelle properties.
+          </li>
+          <li>Udløs ændringen på siden, og inspicér elementet igen.</li>
+        </ol>
+      </details>
+    </header>
+
+    <main>
+      <section aria-labelledby="roles-title">
+        <h2 id="roles-title">1. Samme udseende, forskellige roller</h2>
+        <p>
+          Forudsig rolle, navn og tastaturadfærd for hvert element. Inspicér dem
+          bagefter.
+        </p>
+
+        <div class="examples">
+          <a class="control-like" href="#destination">Se produkt</a>
+          <a class="control-like">Se produkt</a>
+          <button type="button">Vis filtre</button>
+          <div
+            class="control-like"
+            id="scripted-button"
+            role="button"
+            tabindex="0"
+          >
+            Vis filtre
+          </div>
+        </div>
+
+        <p>
+          <strong>Prøv også:</strong> Brug først musen og derefter
+          <kbd>Tab</kbd>, <kbd>Enter</kbd> og <kbd>Mellemrum</kbd>.
+        </p>
+        <p id="activation-result">Ingen handling er aktiveret endnu.</p>
+        <p id="destination" tabindex="-1">
+          Linkets destination på denne demoside.
+        </p>
+      </section>
+
+      <section aria-labelledby="names-title">
+        <h2 id="names-title">2. Hvor kommer knappens navn fra?</h2>
+        <p>
+          Den synlige knap ændrer ikke udseende, men JavaScript ændrer kilden
+          til dens accessible name.
+        </p>
+
+        <article class="sample">
+          <h3 id="product-title">Nike Zoom Vomero 5</h3>
+          <button id="name-demo" type="button">Læg i kurv</button>
+        </article>
+
+        <fieldset>
+          <legend>Vælg navnekilde</legend>
+          <div class="examples">
+            <button type="button" data-name-mode="contents">
+              Knappens indhold
+            </button>
+            <button type="button" data-name-mode="label">
+              <code>aria-label</code>
+            </button>
+            <button type="button" data-name-mode="labelledby">
+              <code>aria-labelledby</code>
+            </button>
+          </div>
+        </fieldset>
+
+        <p id="name-mode">Aktuel variant: Knappens eget indhold.</p>
+        <p>
+          <strong>Undersøg:</strong> Hvad bliver navnet? Hvilken kilde viser
+          Chrome? Indeholder navnet stadig den synlige tekst?
+        </p>
+      </section>
+
+      <section aria-labelledby="membership-title">
+        <h2 id="membership-title">3. Hvad kommer med i træet?</h2>
+        <p>
+          Sammenlign DOM’en, den visuelle side og accessibility-træet. Brug
+          knapperne til at ændre eksemplerne.
+        </p>
+
+        <div class="membership-list">
+          <p id="hidden-target" hidden>
+            Jeg styres med HTML-attributten <code>hidden</code>.
+          </p>
+          <p id="display-target" class="display-none">
+            Jeg styres med <code>display: none</code>.
+          </p>
+          <p id="aria-hidden-target" aria-hidden="true">
+            Jeg er synlig, men har <code>aria-hidden="true"</code>.
+          </p>
+          <p class="visually-hidden">
+            Jeg er visuelt skjult, men bør stadig kunne findes i
+            accessibility-træet.
+          </p>
+          <p id="ordinary-target">Jeg er almindeligt indhold.</p>
+        </div>
+
+        <div class="examples">
+          <button
+            type="button"
+            data-visibility="hidden-target"
+            data-kind="hidden"
+          >
+            Fjern <code>hidden</code>
+          </button>
+          <button
+            type="button"
+            data-visibility="display-target"
+            data-kind="display"
+          >
+            Fjern <code>display: none</code>
+          </button>
+          <button
+            type="button"
+            data-visibility="aria-hidden-target"
+            data-kind="aria-hidden"
+          >
+            Fjern <code>aria-hidden</code>
+          </button>
+          <button
+            type="button"
+            data-visibility="ordinary-target"
+            data-kind="dom"
+          >
+            Fjern fra DOM’en
+          </button>
+        </div>
+
+        <p id="visibility-result">Ingen ændringer endnu.</p>
+      </section>
+
+      <section aria-labelledby="dynamic-title">
+        <h2 id="dynamic-title">4. Tilstande og dynamiske DOM-ændringer</h2>
+
+        <div class="subdemo">
+          <h3>Disclosure</h3>
+          <button
+            type="button"
+            id="disclosure-button"
+            aria-expanded="false"
+            aria-controls="filter-panel"
+          >
+            Vis flere producenter
+          </button>
+          <div id="filter-panel" hidden>
+            <p>Asics, Hoka og Salomon</p>
+          </div>
+          <p>
+            <strong>Undersøg:</strong> Hvad sker der med knappens properties og
+            med panelets placering i træet?
+          </p>
+        </div>
+
+        <div class="subdemo">
+          <h3>Ny DOM og en kort status</h3>
+          <p>Varer i kurven: <span id="cart-count">0</span></p>
+          <button type="button" id="add-product">Læg strømper i kurv</button>
+          <ul id="cart-items" aria-label="Varer i kurven"></ul>
+          <p id="cart-status" role="status"></p>
+          <p>
+            <strong>Undersøg:</strong> Hvor dukker den nye vare op? Hvilken
+            rolle har statusområdet før og efter ændringen?
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="diagnosis-title">
+        <h2 id="diagnosis-title">5. Opsamling: Hvad mangler eller er galt?</h2>
+        <p>
+          Arbejd to og to. Find mindst seks problemer i mini-webshoppen. I
+          behøver ikke rette dem.
+        </p>
+
+        <ol>
+          <li>Forudsig først role, name, state og description.</li>
+          <li>Kontrollér jeres forudsigelse i Chrome.</li>
+          <li>
+            Test også med tastaturet; træet fortæller ikke alt om adfærden.
+          </li>
+          <li>
+            Beskriv for hvert problem, hvad en mere passende løsning bør
+            kommunikere.
+          </li>
+        </ol>
+
+        <div class="broken-shop" aria-label="Mini-webshop til diagnose">
+          <div class="looks-like-heading">Udvalgte sneakers</div>
+
+          <article>
+            <h3>Nike Zoom Vomero 5</h3>
+            <p>1.299 kr.</p>
+            <a class="control-like">Se detaljer</a>
+            <button type="button">Læg i kurv</button>
+            <button class="icon-button" type="button">
+              <span aria-hidden="true">♥</span>
+            </button>
+          </article>
+
+          <article>
+            <h3>Adidas Handball Spezial</h3>
+            <p>899 kr.</p>
+            <button type="button">Læg i kurv</button>
+            <button type="button" aria-label="Luk">
+              <span>Fjern fra sammenligning</span>
+            </button>
+          </article>
+
+          <div class="subdemo">
+            <p><strong>Vælg størrelse</strong></p>
+            <div class="examples" id="size-picker">
+              <button type="button" class="size selected">40</button>
+              <button type="button" class="size">41</button>
+              <button type="button" class="size">42</button>
+            </div>
+          </div>
+
+          <div class="subdemo">
+            <p>E-mail</p>
+            <input id="email" type="email" placeholder="navn@eksempel.dk" />
+            <p class="error">Skriv en gyldig e-mailadresse.</p>
+          </div>
+
+          <div class="control-like" id="broken-cart" tabindex="0">Åbn kurv</div>
+          <p id="broken-result">Kurven er lukket.</p>
+        </div>
+
+        <details class="reflection">
+          <summary>Ekstra spørgsmål, hvis I bliver hurtigt færdige</summary>
+          <ul>
+            <li>Hvilke problemer kan ses direkte i accessibility-træet?</li>
+            <li>Hvilke kræver også tastaturtest eller visuel inspektion?</li>
+            <li>
+              Hvilke fejl skyldes manglende HTML-semantik, og hvilke handler om
+              ARIA?
+            </li>
+            <li>
+              Hvor ville native HTML fjerne behovet for JavaScript eller ARIA?
+            </li>
+          </ul>
+        </details>
+      </section>
+    </main>
+  </body>
+</html>

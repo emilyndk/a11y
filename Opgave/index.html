@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sneakers | SOLE OBJECTS</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header shell">
+      <a class="brand" href="../index.html">SOLE OBJECTS</a>
+
+      <nav class="primary-navigation">
+        <ul>
+          <li><a href="#new">Nyheder</a></li>
+          <li><a href="#sneakers">Sneakers</a></li>
+          <li><a href="#accessories">Accessories</a></li>
+        </ul>
+      </nav>
+
+      <p class="cart">Kurv <span id="cart-count">0</span></p>
+    </header>
+
+    <nav class="breadcrumbs shell">
+      <ol>
+        <li><a href="#home">Forside</a></li>
+        <li><a href="#products">Produkter</a></li>
+        <li><a href="#sneakers">Sneakers</a></li>
+      </ol>
+    </nav>
+
+    <main class="shell" id="main">
+      <header class="page-header">
+        <h1>Sneakers</h1>
+        <p>Hverdagsfavoritter, løbesilhuetter og klassikere i nye farver.</p>
+      </header>
+
+      <section class="buying-help">
+        <h3 id="buying-help-title">Før du vælger</h3>
+
+        <div class="button-like" id="info-toggle" role="button" tabindex="0">
+          Vis tips om pasform
+        </div>
+
+        <div id="fit-information" hidden>
+          <p>
+            De fleste modeller er normale i størrelsen. Ligger du mellem to
+            størrelser, anbefaler vi den største.
+          </p>
+        </div>
+      </section>
+
+      <section class="products-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Redaktionens valg</p>
+            <h2 id="popular-title">Populære lige nu</h2>
+          </div>
+          <p>2 produkter</p>
+        </div>
+
+        <ul class="product-list">
+          <li>
+            <article class="product-card" data-product="Nike Zoom Vomero 5">
+              <div class="media">
+                <img
+                  src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                />
+                <button class="favourite" type="button">
+                  <span class="heart">♡</span>
+                </button>
+              </div>
+
+              <div class="product-content">
+                <div>
+                  <h2 id="vomero-title">
+                    <a href="#vomero">Nike Zoom Vomero 5</a>
+                  </h2>
+                  <p class="kind">Lifestyle · 6 farver</p>
+                </div>
+
+                <p class="price">1.299 kr.</p>
+
+                <button class="add-to-cart" type="button">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 8h12l1 13H5L6 8Zm3 0V6a3 3 0 0 1 6 0v2" />
+                  </svg>
+                  <span id="vomero-action">Læg i kurv</span>
+                </button>
+              </div>
+            </article>
+          </li>
+
+          <li>
+            <article
+              class="product-card"
+              data-product="Adidas Handball Spezial"
+            >
+              <div class="media">
+                <img
+                  src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                />
+                <button class="favourite" type="button">
+                  <span class="heart">♡</span>
+                </button>
+              </div>
+
+              <div class="product-content">
+                <div>
+                  <h2 id="spezial-title">
+                    <a href="#spezial">Adidas Handball Spezial</a>
+                  </h2>
+                  <p class="kind">Originals · 4 farver</p>
+                </div>
+
+                <p class="price">899 kr.</p>
+
+                <button class="add-to-cart" type="button">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 8h12l1 13H5L6 8Zm3 0V6a3 3 0 0 1 6 0v2" />
+                  </svg>
+                  <span id="spezial-action">Læg i kurv</span>
+                </button>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <p class="status" id="cart-status"></p>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <p>
+          <strong>SOLE OBJECTS</strong> · En undervisningsside med bevidste
+          tilgængelighedsproblemer.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
